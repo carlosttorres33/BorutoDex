@@ -1,32 +1,25 @@
 package com.carlostorres.borutodex.ui.welcome
 
-import androidx.compose.foundation.Image
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavHostController
-import com.carlostorres.borutodex.R
 import com.carlostorres.borutodex.data.model.OnBoardingPage
-import com.carlostorres.borutodex.ui.theme.EXTRA_LARGE_PADDING
-import com.carlostorres.borutodex.ui.theme.SMALL_PADDING
-import com.carlostorres.borutodex.ui.theme.descriptionColor
-import com.carlostorres.borutodex.ui.theme.titleColor
+import com.carlostorres.borutodex.ui.theme.PAGING_INDICATOR_SPACING
+import com.carlostorres.borutodex.ui.theme.PAGING_INDICATOR_WIDTH
+import com.carlostorres.borutodex.ui.theme.activeIndicatorColor
+import com.carlostorres.borutodex.ui.theme.inactiveIndicatorColor
 import com.carlostorres.borutodex.ui.theme.welcomeScreenBkgColor
+import com.carlostorres.borutodex.ui.welcome.components.FinishButton
+import com.carlostorres.borutodex.ui.welcome.components.PagerContent
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 
 @OptIn(ExperimentalPagerApi::class)
@@ -50,6 +43,8 @@ fun WelcomeScreen(
     ) {
 
         HorizontalPager(
+            modifier = Modifier
+                .weight(10f),
             state = pagerState,
             count = pages.size,
             verticalAlignment = Alignment.Top
@@ -58,53 +53,25 @@ fun WelcomeScreen(
             PagerContent(onBoardingPage = pages[actualPage])
 
         }
-    }
-}
 
-@Composable
-fun PagerContent(
-    onBoardingPage: OnBoardingPage
-) {
-
-    Column(
-        modifier = Modifier
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top
-    ) {
-
-        Image(
+        HorizontalPagerIndicator(
             modifier = Modifier
-                .fillMaxWidth(0.5f)
-                .fillMaxHeight(0.5f),
-            painter = painterResource(id = onBoardingPage.image),
-            contentDescription = stringResource(
-                R.string.on_boarding_image
-            )
-        )
-        
-        Text(
-            text = onBoardingPage.title,
-            color = MaterialTheme.colors.titleColor,
-            fontSize = MaterialTheme.typography.h4.fontSize,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .fillMaxWidth()
+                .weight(1f)
+                .align(Alignment.CenterHorizontally),
+            pagerState = pagerState,
+            activeColor = MaterialTheme.colors.activeIndicatorColor,
+            inactiveColor = MaterialTheme.colors.inactiveIndicatorColor,
+            indicatorWidth = PAGING_INDICATOR_WIDTH,
+            spacing = PAGING_INDICATOR_SPACING,
         )
 
-        Text(
-            text = onBoardingPage.description,
-            color = MaterialTheme.colors.descriptionColor,
-            fontStyle = MaterialTheme.typography.subtitle1.fontStyle,
-            fontWeight = FontWeight.Medium,
-            textAlign = TextAlign.Center,
+        FinishButton(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = EXTRA_LARGE_PADDING)
-                .padding(top = SMALL_PADDING)
-        )
+                .weight(1f),
+            pagerState = pagerState
+        ) {
+            
+        }
 
     }
-
 }

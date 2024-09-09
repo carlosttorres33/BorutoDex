@@ -32,3 +32,15 @@ val Colors.titleColor
 val Colors.descriptionColor
     @Composable
     get() = if (isSystemInDarkTheme()) LightGray.copy(alpha = 0.5f) else DarkGray.copy(0.5f)
+
+val Colors.activeIndicatorColor
+    @Composable
+    get() = if (isSystemInDarkTheme()) Purple700 else Purple500
+
+val Colors.inactiveIndicatorColor
+    @Composable
+    get() = if (isSystemInDarkTheme()) DarkGray else LightGray
+
+val Colors.buttonBkgColor
+    @Composable
+    get() = if (isSystemInDarkTheme()) Purple700 else Purple500
