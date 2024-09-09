@@ -1,6 +1,14 @@
 package com.carlostorres.borutodex.ui.welcome.components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -36,6 +44,14 @@ fun FinishButton(
     ) {
 
         AnimatedVisibility(
+            enter = slideInHorizontally (
+                initialOffsetX = { it },
+                animationSpec = tween(durationMillis = 200)
+            ),
+            exit = slideOutHorizontally(
+                targetOffsetX = { it },
+                animationSpec = tween(durationMillis = 200)
+            ),
             visible = pagerState.currentPage == 2
         ) {
 
