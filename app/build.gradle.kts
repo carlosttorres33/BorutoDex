@@ -100,8 +100,8 @@ dependencies {
     //Room
     implementation("androidx.room:room-runtime:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
-    // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:2.6.1")
+    implementation("androidx.room:room-paging:2.6.1")
 
     // Accompanist
     implementation ("com.google.accompanist:accompanist-pager:0.28.0")

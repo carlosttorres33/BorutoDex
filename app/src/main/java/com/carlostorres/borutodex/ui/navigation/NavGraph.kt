@@ -1,4 +1,4 @@
-package com.carlostorres.borutodex.navigation
+package com.carlostorres.borutodex.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -15,23 +15,23 @@ fun SetupNavGraph(
 
     NavHost(
         navController = navController,
-        startDestination = Screen.Search.route
+        startDestination = ScreenRoutes.Search.route
     ){
 
-        composable(route = Screen.Splash.route){
+        composable(route = ScreenRoutes.Splash.route){
 
         }
 
-        composable(route = Screen.Welcome.route){
+        composable(route = ScreenRoutes.Welcome.route){
 
         }
 
-        composable(route = Screen.Home.route){
+        composable(route = ScreenRoutes.Home.route){
 
         }
 
         composable(
-            route = Screen.Details.route,
+            route = ScreenRoutes.Details.route,
             arguments = listOf(
                 navArgument(DETAILS_ARGUMENT_KEY){
                     type = NavType.IntType
@@ -41,7 +41,7 @@ fun SetupNavGraph(
 
         }
 
-        composable(route = Screen.Search.route){
+        composable(route = ScreenRoutes.Search.route){
 
         }
 
