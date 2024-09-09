@@ -6,6 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.carlostorres.borutodex.ui.splash.SplashScreen
 import com.carlostorres.borutodex.util.Constants.DETAILS_ARGUMENT_KEY
 
 @Composable
@@ -15,11 +16,11 @@ fun SetupNavGraph(
 
     NavHost(
         navController = navController,
-        startDestination = ScreenRoutes.Search.route
+        startDestination = ScreenRoutes.Splash.route
     ){
 
         composable(route = ScreenRoutes.Splash.route){
-
+            SplashScreen(navController)
         }
 
         composable(route = ScreenRoutes.Welcome.route){
