@@ -8,8 +8,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.carlostorres.borutodex.data.model.OnBoardingPage
+import com.carlostorres.borutodex.presentation.welcome.WelcomeViewModel
+import com.carlostorres.borutodex.ui.navigation.ScreenRoutes
 import com.carlostorres.borutodex.ui.theme.PAGING_INDICATOR_SPACING
 import com.carlostorres.borutodex.ui.theme.PAGING_INDICATOR_WIDTH
 import com.carlostorres.borutodex.ui.theme.activeIndicatorColor
@@ -25,6 +28,7 @@ import com.google.accompanist.pager.rememberPagerState
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun WelcomeScreen(
+    viewModel: WelcomeViewModel = hiltViewModel(),
     navController: NavHostController,
 ) {
 
@@ -70,7 +74,9 @@ fun WelcomeScreen(
                 .weight(1f),
             pagerState = pagerState
         ) {
-            
+            navController.popBackStack()
+            navController.navigate(ScreenRoutes.Home.route)
+            viewModel.saveOnBoardingState(completed = true)
         }
 
     }
