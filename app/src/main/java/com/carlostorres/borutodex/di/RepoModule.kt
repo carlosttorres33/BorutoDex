@@ -1,8 +1,12 @@
 package com.carlostorres.borutodex.di
 
 import android.content.Context
-import com.carlostorres.borutodex.data.pref.DataStoreOperationsImpl
+import com.carlostorres.borutodex.data.repository.DataStoreOperationsImpl
+import com.carlostorres.borutodex.data.repository.Repository
 import com.carlostorres.borutodex.domain.repository.DataStoreOperations
+import com.carlostorres.borutodex.domain.use_cases.UseCases
+import com.carlostorres.borutodex.domain.use_cases.read_onboarding.ReadOnBoardingUseCase
+import com.carlostorres.borutodex.domain.use_cases.save_oboarding.SaveOnBoardingUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,6 +24,15 @@ object RepoModule {
         @ApplicationContext context: Context
     ) : DataStoreOperations {
         return DataStoreOperationsImpl(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUseCases(repository: Repository) : UseCases{
+        return UseCases(
+            saveOnBoardingUseCase = SaveOnBoardingUseCase(repository),
+            readOnBoardingUseCase = ReadOnBoardingUseCase(repository)
+        )
     }
 
 }
