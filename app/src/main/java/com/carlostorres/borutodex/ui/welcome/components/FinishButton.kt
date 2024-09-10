@@ -25,6 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import com.carlostorres.borutodex.ui.theme.EXTRA_LARGE_PADDING
 import com.carlostorres.borutodex.ui.theme.buttonBkgColor
 import com.carlostorres.borutodex.ui.theme.titleColor
+import com.carlostorres.borutodex.util.Constants.LAST_ON_BOARDING_PAGE
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 
@@ -52,7 +53,7 @@ fun FinishButton(
                 targetOffsetX = { it },
                 animationSpec = tween(durationMillis = 200)
             ),
-            visible = pagerState.currentPage == 2
+            visible = pagerState.currentPage == LAST_ON_BOARDING_PAGE
         ) {
 
             Button(
