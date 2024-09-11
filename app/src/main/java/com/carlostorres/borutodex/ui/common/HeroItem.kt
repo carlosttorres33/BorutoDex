@@ -59,7 +59,7 @@ fun HeroItem(
                     )
             },
         shape = RoundedCornerShape(LARGE_PADDING),
-        elevation = CardDefaults.cardElevation(defaultElevation = SMALL_PADDING)
+        elevation = CardDefaults.cardElevation(defaultElevation = MEDIUM_PADDING),
     ) {
 
         Box(modifier = Modifier.fillMaxSize()) {
