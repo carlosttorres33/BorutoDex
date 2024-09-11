@@ -11,6 +11,7 @@ object Constants {
     const val BORUTO_DATABASE = "boruto_database"
 
     const val LAST_ON_BOARDING_PAGE = 2
+    const val ITEMS_PER_PAGE = 3
 
     const val PREFERENCES_NAME : String = "boruto_preferences"
     const val PREFERENCES_KEY = "on_boarding_completed"

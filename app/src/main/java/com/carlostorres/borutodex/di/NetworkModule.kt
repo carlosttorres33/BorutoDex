@@ -1,6 +1,9 @@
 package com.carlostorres.borutodex.di
 
+import com.carlostorres.borutodex.data.local.BorutoDatabase
 import com.carlostorres.borutodex.data.remote.BorutoApi
+import com.carlostorres.borutodex.data.repository.RemoteDataSourceImpl
+import com.carlostorres.borutodex.domain.repository.RemoteDataSource
 import com.carlostorres.borutodex.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -45,5 +48,12 @@ object NetworkModule {
     ) : BorutoApi {
         return retrofit.create(BorutoApi::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideRemoteDataSource(
+        api: BorutoApi,
+        database: BorutoDatabase
+    ) : RemoteDataSource = RemoteDataSourceImpl(borutoApi = api, borutoDatabase = database)
 
 }
