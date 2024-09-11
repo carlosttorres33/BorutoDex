@@ -90,7 +90,7 @@ dependencies {
     implementation ("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
 
     //KotlinX Serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
     //Paging 3
     implementation("androidx.paging:paging-compose:3.3.2")
