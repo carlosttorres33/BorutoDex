@@ -1,8 +1,11 @@
 package com.carlostorres.borutodex.ui.home.components
 
+import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
@@ -14,6 +17,9 @@ import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.carlostorres.borutodex.ui.theme.StartColor
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 
 @Composable
 fun FilledStart(
@@ -28,7 +34,7 @@ fun FilledStart(
             .size(24.dp)
     ) {
 
-        val canvasSize = this.size
+        val canvasSize = size
 
         scale(scale = scaleFactor) {
 
@@ -67,7 +73,7 @@ fun HalfFilledStart(
             .size(24.dp)
     ) {
 
-        val canvasSize = this.size
+        val canvasSize = size
 
         scale(scale = scaleFactor) {
 
@@ -85,7 +91,7 @@ fun HalfFilledStart(
                     path = startPath,
                     color = Color.LightGray.copy(alpha = 0.5f)
                 )
-                clipPath(path = startPath){
+                clipPath(path = startPath) {
                     drawRect(
                         color = StartColor,
                         size = Size(
@@ -99,7 +105,7 @@ fun HalfFilledStart(
 
         }
     }
-    
+
 }
 
 @Composable
@@ -115,7 +121,7 @@ fun EmptyStart(
             .size(24.dp)
     ) {
 
-        val canvasSize = this.size
+        val canvasSize = size
 
         scale(scale = scaleFactor) {
 
@@ -138,6 +144,56 @@ fun EmptyStart(
 
         }
     }
+
+}
+
+@Composable
+fun calculateStarts(rating: Double): Map<String, Int> {
+
+    val maxStarts by remember {
+        mutableStateOf(5)
+    }
+    var filledStarts by remember {
+        mutableStateOf(0)
+    }
+    var halfFilledStarts by remember {
+        mutableStateOf(0)
+    }
+    var emptyStarts by remember {
+        mutableStateOf(0)
+    }
+
+    LaunchedEffect(key1 = rating) {
+
+        val (firstNumber, lastNumber) = rating.toString()
+            .split(".").map { it.toInt() }
+
+        if (firstNumber in 0..5 && lastNumber in 0..9) {
+            filledStarts = firstNumber
+            if (lastNumber in 1..5) {
+                halfFilledStarts++
+            }
+            if (lastNumber in 6..9) {
+                filledStarts++
+            }
+            if (firstNumber == 5 && lastNumber > 0) {
+                emptyStarts = 5
+                filledStarts = 0
+                halfFilledStarts = 0
+            }
+        } else {
+            Log.d("RatyingWidget", "Invalid rating number")
+        }
+
+    }
+
+    emptyStarts = maxStarts - (filledStarts + halfFilledStarts)
+
+    return mapOf(
+        "filledStarts" to filledStarts,
+        "halfFilledStarts" to halfFilledStarts,
+        "emptyStarts" to emptyStarts
+    )
 
 }
 
