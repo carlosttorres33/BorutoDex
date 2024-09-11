@@ -24,7 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.carlostorres.borutodex.R
-import com.carlostorres.borutodex.presentation.SplashViewModel
+import com.carlostorres.borutodex.presentation.splash.SplashViewModel
 import com.carlostorres.borutodex.ui.navigation.ScreenRoutes
 import com.carlostorres.borutodex.ui.theme.Purple500
 import com.carlostorres.borutodex.ui.theme.Purple700

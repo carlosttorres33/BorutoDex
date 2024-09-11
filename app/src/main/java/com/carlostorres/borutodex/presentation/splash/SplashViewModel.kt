@@ -1,4 +1,4 @@
-package com.carlostorres.borutodex.presentation
+package com.carlostorres.borutodex.presentation.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
