@@ -5,6 +5,7 @@ import com.carlostorres.borutodex.data.repository.DataStoreOperationsImpl
 import com.carlostorres.borutodex.data.repository.Repository
 import com.carlostorres.borutodex.domain.repository.DataStoreOperations
 import com.carlostorres.borutodex.domain.use_cases.UseCases
+import com.carlostorres.borutodex.domain.use_cases.get_all_heroes.GetAllHeroesUseCase
 import com.carlostorres.borutodex.domain.use_cases.read_onboarding.ReadOnBoardingUseCase
 import com.carlostorres.borutodex.domain.use_cases.save_oboarding.SaveOnBoardingUseCase
 import dagger.Module
@@ -31,7 +32,8 @@ object RepoModule {
     fun provideUseCases(repository: Repository) : UseCases{
         return UseCases(
             saveOnBoardingUseCase = SaveOnBoardingUseCase(repository),
-            readOnBoardingUseCase = ReadOnBoardingUseCase(repository)
+            readOnBoardingUseCase = ReadOnBoardingUseCase(repository),
+            getAllHeroesUseCase = GetAllHeroesUseCase(repository)
         )
     }
 
