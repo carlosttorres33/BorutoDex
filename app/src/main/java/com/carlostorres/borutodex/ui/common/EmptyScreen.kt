@@ -20,7 +20,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.traceEventEnd
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -28,13 +27,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import com.carlostorres.borutodex.R
 import com.carlostorres.borutodex.ui.theme.DarkGray
 import com.carlostorres.borutodex.ui.theme.LightGray
 import com.carlostorres.borutodex.ui.theme.NETWORK_ERROR_ICON_HEIGHT
 import com.carlostorres.borutodex.ui.theme.SMALL_PADDING
+import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 @Composable
@@ -43,7 +42,7 @@ fun EmptyScreen(
 ) {
 
     val message by remember {
-        mutableStateOf(parseErrorMessage(message = error.toString()))
+        mutableStateOf(parseErrorMessage(error = error))
     }
 
     val icon by remember {
@@ -104,13 +103,12 @@ fun EmptyContent(
     
 }
 
-fun parseErrorMessage(message : String) : String {
-    Log.d("Error", message)
-    return when {
-        message.contains("SocketTimeoutException") -> {
+fun parseErrorMessage(error : LoadState.Error) : String {
+    return when (error.error) {
+        is SocketTimeoutException -> {
             "Server Unavailable"
         }
-        message.contains("ConnectException") -> {
+        is ConnectException -> {
             "Internet Unavailable"
         }
         else -> {

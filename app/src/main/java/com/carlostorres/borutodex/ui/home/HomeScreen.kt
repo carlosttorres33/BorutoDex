@@ -12,6 +12,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.carlostorres.borutodex.presentation.home.HomeViewModel
 import com.carlostorres.borutodex.ui.home.components.HomeTopBar
 import com.carlostorres.borutodex.ui.common.ListContent
+import com.carlostorres.borutodex.ui.navigation.ScreenRoutes
 
 @Composable
 fun HomeScreen(
@@ -24,7 +25,7 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             HomeTopBar {
-
+                navController.navigate(ScreenRoutes.Search.route)
             }
         },
         content = { paddingValues ->
