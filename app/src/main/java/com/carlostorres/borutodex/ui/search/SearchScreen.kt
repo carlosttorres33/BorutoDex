@@ -8,6 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.focus.FocusRequester
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.carlostorres.borutodex.presentation.search.SearchViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -18,6 +19,7 @@ fun SearchScreen(
 ) {
 
     val searchQuery = viewModel.searchQuery.value
+    val heroes = viewModel.searchHeroes.collectAsLazyPagingItems()
 
     val focusRequester =
         remember { FocusRequester() }
@@ -34,7 +36,7 @@ fun SearchScreen(
                     viewModel.updateSearchQuery(it)
                 },
                 onSearchClicked = {
-
+                    viewModel.searchHeroes(it)
                 },
                 onCloseClicked = {
                     navController.popBackStack()
@@ -44,7 +46,7 @@ fun SearchScreen(
         }
     ) { padding ->
 
-
+        
 
     }
 
