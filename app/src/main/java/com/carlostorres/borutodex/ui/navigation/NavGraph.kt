@@ -6,6 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.carlostorres.borutodex.ui.details.DetailsScreen
 import com.carlostorres.borutodex.ui.home.HomeScreen
 import com.carlostorres.borutodex.ui.search.SearchScreen
 import com.carlostorres.borutodex.ui.splash.SplashScreen
@@ -44,7 +45,7 @@ fun SetupNavGraph(
                 }
             )
         ){
-
+            DetailsScreen(navController = navController)
         }
 
         composable(route = ScreenRoutes.Search.route){

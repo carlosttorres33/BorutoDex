@@ -3,6 +3,8 @@ package com.carlostorres.borutodex.di
 import android.content.Context
 import androidx.room.Room
 import com.carlostorres.borutodex.data.local.BorutoDatabase
+import com.carlostorres.borutodex.data.repository.LocalDataSourceImpl
+import com.carlostorres.borutodex.domain.repository.LocalDataSource
 import com.carlostorres.borutodex.util.Constants.BORUTO_DATABASE
 import dagger.Module
 import dagger.Provides
@@ -19,11 +21,17 @@ object DatabaseModule {
     @Provides
     fun provideBorutoDatabase(
         @ApplicationContext context: Context
-    ) = Room.databaseBuilder(
+    ): BorutoDatabase = Room.databaseBuilder(
         context = context,
         klass = BorutoDatabase::class.java,
         name = BORUTO_DATABASE
     ).fallbackToDestructiveMigration()
         .build()
+
+    @Singleton
+    @Provides
+    fun provideLocalDataSource(
+        database: BorutoDatabase
+    ) : LocalDataSource = LocalDataSourceImpl(database)
 
 }
